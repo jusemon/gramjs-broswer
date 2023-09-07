@@ -1,4 +1,6 @@
-# GramJS
+# GramJS - Broweser
+
+# This is a browser build, to use with npm/yarn
 
 A Telegram client written in JavaScript for Node.js and browsers, with its core being based on
 [Telethon](https://github.com/LonamiWebs/Telethon).
@@ -34,36 +36,36 @@ When you've successfully created the application, change `apiId` and `apiHash` o
 Then run this code to send a message to yourself.
 
 ```javascript
-import { TelegramClient } from "telegram";
-import { StringSession } from "telegram/sessions";
-import input from "input";
+import { TelegramClient } from 'telegram';
+import { StringSession } from 'telegram/sessions';
+import input from 'input';
 
 const apiId = 123456;
-const apiHash = "123456abcdfg";
-const stringSession = new StringSession(""); // fill this later with the value from session.save()
+const apiHash = '123456abcdfg';
+const stringSession = new StringSession(''); // fill this later with the value from session.save()
 
 (async () => {
-  console.log("Loading interactive example...");
+  console.log('Loading interactive example...');
   const client = new TelegramClient(stringSession, apiId, apiHash, {
     connectionRetries: 5,
   });
   await client.start({
-    phoneNumber: async () => await input.text("Please enter your number: "),
-    password: async () => await input.text("Please enter your password: "),
+    phoneNumber: async () => await input.text('Please enter your number: '),
+    password: async () => await input.text('Please enter your password: '),
     phoneCode: async () =>
-      await input.text("Please enter the code you received: "),
+      await input.text('Please enter the code you received: '),
     onError: (err) => console.log(err),
   });
-  console.log("You should now be connected.");
+  console.log('You should now be connected.');
   console.log(client.session.save()); // Save this string to avoid logging in again
-  await client.sendMessage("me", { message: "Hello!" });
+  await client.sendMessage('me', { message: 'Hello!' });
 })();
 ```
 
 > **Note** that you can also save auth key to a folder instead of a string, change `stringSession` into this:
 >
 > ```javascript
-> const storeSession = new StoreSession("folder_name");
+> const storeSession = new StoreSession('folder_name');
 > ```
 
 Be sure to save output of `client.session.save()` into `stringSession` or `storeSession` variable to avoid logging in again.
